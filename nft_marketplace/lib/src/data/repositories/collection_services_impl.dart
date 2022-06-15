@@ -13,10 +13,10 @@ class CollectionServiceImpl implements CollectionService {
   Future<CollectionModel?> getAllCollections(
       {String? apiKey, String? chain, String? include, int? pageSize}) async {
     try {
-      final _queryParameters = <String, dynamic>{
-        r'chain': chain,
-        r'include': include,
-        r'page_size': pageSize
+      final _queryParameters = {
+        'chain': chain,
+        'page_size': pageSize.toString(),
+        'include': include,
       };
 
       final _result = await _baseHTTPService.get(

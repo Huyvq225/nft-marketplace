@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get_it/get_it.dart';
 import 'package:nft_marketplace/src/data/repositories/base_http_services_impl.dart';
 import 'package:nft_marketplace/src/data/repositories/collection_services_impl.dart';
@@ -6,14 +8,16 @@ import 'package:nft_marketplace/src/data/services/collection_services.dart';
 import 'package:nft_marketplace/src/domain/repositories/collection_repository.dart';
 import 'package:nft_marketplace/src/domain/usecases/get_collections_usecase.dart';
 import 'package:http/http.dart' as http;
+import 'package:nft_marketplace/src/presentation/views/main_page/bloc/main_page_bloc.dart';
 
 final injector = GetIt.instance;
 
 Future<void> initializeDependencies() async {
   //Data
+  injector.registerSingleton<http.Client>(http.Client());
+  injector.registerSingleton<BaseHTTPServices>(BaseHTTPServiceImpl(injector()));
   injector
       .registerSingleton<CollectionService>(CollectionServiceImpl(injector()));
-  injector.registerSingleton<BaseHTTPServices>(BaseHTTPServiceImpl(injector()));
 
   //Domain
   injector.registerSingleton<CollectionRepository>(
@@ -26,5 +30,6 @@ Future<void> initializeDependencies() async {
   injector.registerSingleton<GetCollectionsUseCase>(
       GetCollectionsUseCase(injector()));
 
-  injector.registerLazySingleton(() => http.Client);
+  //bloc
+  injector.registerFactory(() => MainPageBloc(injector()));
 }

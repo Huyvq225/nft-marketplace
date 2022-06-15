@@ -10,7 +10,6 @@ class BaseHTTPServiceImpl implements BaseHTTPServices {
   @override
   Future<http.Response?> get(
       {String endpoint = '', Map<String, dynamic>? param}) async {
-
     final _uri = Uri.https(kBaseUrl, endpoint, param);
     final _requestHeader = _prepareRequestHeader();
     final _result = await client.get(_uri, headers: _requestHeader);
@@ -28,5 +27,4 @@ class BaseHTTPServiceImpl implements BaseHTTPServices {
     final _requestHeader = {'Authorization': kApiKey};
     return _requestHeader;
   }
-
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:get_it/get_it.dart';
 import 'package:nft_marketplace/src/data/repositories/base_http_services_impl.dart';
 import 'package:nft_marketplace/src/data/repositories/collection_services_impl.dart';

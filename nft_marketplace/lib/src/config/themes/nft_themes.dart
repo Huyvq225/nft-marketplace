@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nft_marketplace/src/config/colors/nft_colors.dart';
 
 class NftThemeData {
   NftThemeData._();
 
-  static ThemeData lightThemeData = lightTheme();
-  static ThemeData darkThemeData = darkTheme();
+  static ThemeData lightThemeData = _lightTheme();
+  static ThemeData darkThemeData = _darkTheme();
 
-  static ThemeData lightTheme() {
+  static ThemeData _lightTheme() {
     return ThemeData(
       visualDensity: VisualDensity.adaptivePlatformDensity,
       fontFamily: 'SF UI Text',
@@ -22,7 +21,7 @@ class NftThemeData {
     );
   }
 
-  static ThemeData darkTheme() {
+  static ThemeData _darkTheme() {
     return ThemeData(
       visualDensity: VisualDensity.adaptivePlatformDensity,
       fontFamily: 'SF UI Text',

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nft_marketplace/src/config/colors/nft_component_color.dart';
 import 'package:nft_marketplace/src/config/text_styles/nft_text_styles.dart';
-import 'package:nft_marketplace/src/config/themes/nft_theme_type.dart';
 import 'package:nft_marketplace/src/core/bloc/theme/theme_bloc.dart';
 import 'package:nft_marketplace/src/domain/entities/nft.dart';
 import 'package:nft_marketplace/src/presentation/views/main_page/bloc/main_page_bloc.dart';
+import 'package:nft_marketplace/src/presentation/widgets/bottom_navigation_bar/bottom_navigation_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -17,23 +17,16 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   late final NftComponentColor nftComponentColor;
 
-  // @override
-  // void initState() {
-  //   nftComponentColor = NftComponentColor(context);
-  //   super.initState();
-  // }
-  //
-  // @override
-  // void didUpdateWidget(covariant MainPage oldWidget) {
-  //   nftComponentColor = NftComponentColor(context);
-  //   super.didUpdateWidget(oldWidget);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildBody(),
+      bottomNavigationBar: BottomNavigationBarWidget(
+        onChanged: (tabIndex) {
+          print('Tab index');
+        },
+      ),
     );
   }
 

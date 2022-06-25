@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nft_marketplace/src/config/colors/nft_component_color.dart';
 import 'package:nft_marketplace/src/config/icons/nft_icons.dart';
+import 'package:nft_marketplace/src/presentation/views/home/home_page.dart';
+import 'package:nft_marketplace/src/presentation/views/more/more_page.dart';
+import 'package:nft_marketplace/src/presentation/views/rank/ranking_page.dart';
+import 'package:nft_marketplace/src/presentation/views/wallet/wallet_page.dart';
 import 'package:nft_marketplace/src/presentation/widgets/bottom_navigation_bar/bloc/bottom_navigation_bar_bloc.dart';
 
 // ignore: must_be_immutable
@@ -68,7 +72,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   }
 
   List<BottomNavigationBarItem> _bottomNavBarItems(BuildContext context) {
-    return bottomNavItemList
+    return BottomNavItemConfig.bottomNavItemList
         .map<BottomNavigationBarItem>(
             (tab) => _bottomNavBarItem(context, tabItem: tab))
         .toList();
@@ -94,12 +98,23 @@ typedef BottomNavBarOnChanged = void Function(int);
 
 enum BottomNavItem { home, rank, wallet, more }
 
-const List<BottomNavItem> bottomNavItemList = [
-  BottomNavItem.home,
-  BottomNavItem.rank,
-  BottomNavItem.wallet,
-  BottomNavItem.more,
-];
+class BottomNavItemConfig {
+  static List<BottomNavItem> bottomNavItemList = [
+    BottomNavItem.home,
+    BottomNavItem.rank,
+    BottomNavItem.wallet,
+    BottomNavItem.more,
+  ];
+
+  static List<Widget> pages({dynamic arg}) {
+    return const [
+      HomePage(),
+      RankingPage(),
+      WalletPage(),
+      MorePage(),
+    ];
+  }
+}
 
 extension BottomNavItemExtension on BottomNavItem {
   String get label {

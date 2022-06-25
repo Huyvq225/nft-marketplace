@@ -57,6 +57,24 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            dimension "default"
+            applicationIdSuffix ".dev"
+            manifestPlaceholders = [appName: "[DEV] NFT Marketplace"]
+        }
+        uat {
+            dimension "default"
+            applicationIdSuffix ".uat"
+            manifestPlaceholders = [appName: "[UAT] NFT Marketplace"]
+        }
+        prod {
+            dimension "default"
+            manifestPlaceholders = [appName: "NFT Marketplace"]
+        }
+    }
 }
 
 flutter {

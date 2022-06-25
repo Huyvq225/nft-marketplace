@@ -34,4 +34,13 @@ class NftLightComponentColor implements NftComponentColor {
 
   @override
   Color? get bottomNavigationDeselected => _nftColors.neutral[600];
+
+  @override
+  Color? get positivePercent => _nftColors.greenSecondaryColor;
+
+  @override
+  Color? get negativePercent => _nftColors.redSecondaryColor;
+
+  @override
+  Color? get price => _nftColors.neutral[600];
 }

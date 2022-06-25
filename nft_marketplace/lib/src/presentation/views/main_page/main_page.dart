@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nft_marketplace/src/config/colors/nft_component_color.dart';
+import 'package:nft_marketplace/src/config/env/env_config.dart';
 import 'package:nft_marketplace/src/config/text_styles/nft_text_styles.dart';
 import 'package:nft_marketplace/src/core/bloc/theme/theme_bloc.dart';
 import 'package:nft_marketplace/src/domain/entities/nft.dart';
@@ -53,6 +54,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildBody() {
+    List<Widget> _pages = BottomNavItemConfig.pages();
+    return PageView(
+      children: _pages
+    );
     return Container(
       color: NftComponentColor.of(context).background,
       child: BlocBuilder<MainPageBloc, MainPageState>(

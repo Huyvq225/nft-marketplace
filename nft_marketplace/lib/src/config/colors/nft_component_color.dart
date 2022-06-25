@@ -36,4 +36,10 @@ abstract class NftComponentColor {
   Color? get bottomNavigationSelected;
 
   Color? get bottomNavigationDeselected;
+
+  Color? get positivePercent;
+
+  Color? get negativePercent;
+
+  Color? get price;
 }

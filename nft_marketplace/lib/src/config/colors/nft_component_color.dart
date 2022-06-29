@@ -42,4 +42,6 @@ abstract class NftComponentColor {
   Color? get negativePercent;
 
   Color? get price;
+
+  Color? get appBarActionItem;
 }

@@ -43,4 +43,9 @@ class NftDarkComponentColor implements NftComponentColor {
 
   @override
   Color? get price => _nftColors.neutral[600];
+
+  @override
+  Color? get appBarActionItem => _nftColors.greenSecondaryColor;
+
+
 }

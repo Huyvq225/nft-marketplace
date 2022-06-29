@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nft_marketplace/src/config/env/env_config.dart';
 import 'package:nft_marketplace/src/core/bloc/theme/theme_bloc.dart';
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nft_marketplace/src/config/colors/nft_component_color.dart';
 import 'package:nft_marketplace/src/config/text_styles/nft_text_styles.dart';
 
@@ -12,6 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(414, 896));
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
           _topCollections(),
           const SizedBox(height: 29),
           _category(),
+          const SizedBox(height: 29),
         ],
       ),
     );
@@ -38,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 15),
           SizedBox(
-            height: 130,
+            height: 140,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: 5,
@@ -61,21 +64,59 @@ class _HomePageState extends State<HomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-            color: Colors.amber,
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(5),
+        SizedBox(
+          width: 110,
+          height: 110,
+          child: Stack(
+            children: [
+              Positioned(
+                top: 10,
+                left: 10,
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 5,
+                left: 5,
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurpleAccent,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.cyanAccent,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 5),
-        Text(
-          'Game',
-          textAlign: TextAlign.left,
-          style: NFTTypography.t12S
-              .style(fontColor: NftComponentColor.of(context).text),
+
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'E-sport',
+            textAlign: TextAlign.left,
+            style: NFTTypography.t12S
+                .style(fontColor: NftComponentColor.of(context).text),
+          ),
         ),
       ],
     );
@@ -85,7 +126,7 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             'Top collections over',
@@ -96,17 +137,20 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 15),
           _topThreeCollection(),
           const SizedBox(height: 15),
-          ListView.separated(
-            itemCount: 5,
-            shrinkWrap: true,
-            itemBuilder: (_, index) {
-              return _collectionItem(rankingNo: index);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 5,
-              );
-            },
+          Container(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: ListView.separated(
+              itemCount: 5,
+              shrinkWrap: true,
+              itemBuilder: (_, index) {
+                return _collectionItem(rankingNo: index);
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 5,
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -114,14 +158,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _topThreeCollection() {
-    return Row(
-      children: [
-        _topThreeItem(rankingNo: 1),
-        const SizedBox(width: 10,),
-        _topThreeItem(rankingNo: 2),
-        const SizedBox(width: 10,),
-        _topThreeItem(rankingNo: 3),
-      ],
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 1000),
+      child: Row(
+        children: [
+          _topThreeItem(rankingNo: 1),
+          const SizedBox(
+            width: 10,
+          ),
+          _topThreeItem(rankingNo: 2),
+          const SizedBox(
+            width: 10,
+          ),
+          _topThreeItem(rankingNo: 3),
+        ],
+      ),
     );
   }
 
@@ -133,9 +184,12 @@ class _HomePageState extends State<HomePage> {
       _bgColor = Colors.blue;
     }
     return Expanded(
-      child: Container(
-        decoration: BoxDecoration(color: _bgColor, borderRadius: BorderRadius.circular(5)),
-        height: 150,
+      child: AspectRatio(
+        aspectRatio: 2 / 3,
+        child: Container(
+          decoration: BoxDecoration(
+              color: _bgColor, borderRadius: BorderRadius.circular(5)),
+        ),
       ),
     );
   }

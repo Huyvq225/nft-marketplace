@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nft_marketplace/src/config/colors/nft_component_color.dart';
-import 'package:nft_marketplace/src/config/env/env_config.dart';
 import 'package:nft_marketplace/src/config/text_styles/nft_text_styles.dart';
 import 'package:nft_marketplace/src/core/bloc/theme/theme_bloc.dart';
 import 'package:nft_marketplace/src/domain/entities/nft.dart';
 import 'package:nft_marketplace/src/presentation/views/main_page/bloc/main_page_bloc.dart';
+import 'package:nft_marketplace/src/presentation/widgets/app_bar/app_bar_widget.dart';
 import 'package:nft_marketplace/src/presentation/widgets/bottom_navigation_bar/bottom_navigation_bar.dart';
 
 class MainPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: const NFTAppBar(),
       body: _buildBody(),
       bottomNavigationBar: BottomNavigationBarWidget(
         onChanged: (tabIndex) {

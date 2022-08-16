@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nft_marketplace/src/config/colors/nft_component_color.dart';
 import 'package:nft_marketplace/src/config/icons/nft_icons.dart';
+import 'package:nft_marketplace/src/config/localization/app_localization.dart';
 import 'package:nft_marketplace/src/presentation/views/home/home_page.dart';
 import 'package:nft_marketplace/src/presentation/views/more/more_page.dart';
 import 'package:nft_marketplace/src/presentation/views/rank/ranking_page.dart';
@@ -89,7 +90,8 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         tabItem.icon,
         color: NftComponentColor.of(context).bottomNavigationSelected,
       ),
-      label: tabItem.label,
+      // label: AppLocalizations.of(context)?.translate(tabItem.label),
+      label: tabItem.label.tr(),
     );
   }
 }
@@ -120,13 +122,13 @@ extension BottomNavItemExtension on BottomNavItem {
   String get label {
     switch (this) {
       case BottomNavItem.home:
-        return 'Home';
+        return 'home_bottom_tab';
       case BottomNavItem.rank:
-        return 'Rank';
+        return 'ranking_bottom_tab';
       case BottomNavItem.wallet:
-        return 'Wallet';
+        return 'wallet_bottom_tab';
       case BottomNavItem.more:
-        return 'More';
+        return 'more_bottom_tab';
       default:
         return '';
     }

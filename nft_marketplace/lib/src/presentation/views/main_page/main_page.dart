@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nft_marketplace/src/config/colors/nft_component_color.dart';
-import 'package:nft_marketplace/src/config/text_styles/nft_text_styles.dart';
-import 'package:nft_marketplace/src/core/bloc/theme/theme_bloc.dart';
 import 'package:nft_marketplace/src/domain/entities/nft.dart';
 import 'package:nft_marketplace/src/presentation/views/main_page/bloc/main_page_bloc.dart';
 import 'package:nft_marketplace/src/presentation/widgets/app_bar/app_bar_widget.dart';
@@ -31,29 +29,8 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: NftComponentColor.of(context).appBarBackground,
-      title: Text(
-        'NFT Marketplace',
-        style: NFTTypography.t18B
-            .style(fontColor: NftComponentColor.of(context).appBarTitle),
-      ),
-      leading: InkWell(
-        onTap: () {
-          BlocProvider.of<ThemeBloc>(context).add(
-            ThemeChangedEvent(),
-          );
-        },
-        child: const Icon(
-          Icons.account_circle,
-          color: Colors.blue,
-        ),
-      ),
-    );
-  }
-
   Widget _buildBody() {
+    // return Container();
     List<Widget> _pages = BottomNavItemConfig.pages();
     return PageView(
       children: _pages

@@ -19,11 +19,10 @@ class _RankingPageState extends State<RankingPage> {
   Widget _buildBody() {
     return Center(
       child: Column(
-        children: [
-          const SizedBox(
+        children: const [
+          SizedBox(
             height: 300,
           ),
-          _buildFilterItem()
         ],
       ),
     );

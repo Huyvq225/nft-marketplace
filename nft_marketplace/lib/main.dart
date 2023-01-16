@@ -5,6 +5,8 @@ import 'package:nft_marketplace/src/config/env/env_config.dart';
 import 'package:nft_marketplace/src/config/localization/app_localization.dart';
 import 'package:nft_marketplace/src/core/bloc/lang/lang_bloc.dart';
 import 'package:nft_marketplace/src/core/bloc/theme/theme_bloc.dart';
+import 'package:sentry/sentry.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/config/routes/app_routes.dart';
 import 'src/injector.dart';
@@ -13,7 +15,16 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDependencies();
   await EnvConfig.getInfo();
-  runApp(NFTMarketplaceApp());
+  await SentryFlutter.init(
+    (option) {
+      option.dsn = 'https://a898f992a52d4b1a86efe9ae9c1a9af6@o1396839.ingest.sentry.io/6721425';
+      option.tracesSampleRate = 1.0;
+    },
+    appRunner: () => runApp(
+      NFTMarketplaceApp(),
+    ),
+  );
+  // runApp(NFTMarketplaceApp());
 }
 
 // ignore: must_be_immutable
@@ -73,6 +84,9 @@ class NFTMarketplaceApp extends StatelessWidget {
       title: 'nft marketplace',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRoutes.onGenerateRoutes,
+      navigatorObservers: [
+        SentryNavigatorObserver(),
+      ],
       theme: _themeData,
       supportedLocales: [
         LanguageType.en.locale,

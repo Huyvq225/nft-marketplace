@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nft_marketplace/src/config/colors/nft_component_color.dart';
+import 'package:nft_marketplace/src/config/routes/routes_name.dart';
 import 'package:nft_marketplace/src/domain/entities/nft.dart';
 import 'package:nft_marketplace/src/presentation/views/main_page/bloc/main_page_bloc.dart';
 import 'package:nft_marketplace/src/presentation/widgets/app_bar/app_bar_widget.dart';
 import 'package:nft_marketplace/src/presentation/widgets/bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -23,7 +25,13 @@ class _MainPageState extends State<MainPage> {
       body: _buildBody(),
       bottomNavigationBar: BottomNavigationBarWidget(
         onChanged: (tabIndex) {
-          print('Tab index');
+          if (tabIndex == 2) {
+            Future.delayed(const Duration(seconds: 15)).then(
+              (value) {
+                Navigator.pushNamed(context, kNftDetail);
+              },
+            );
+          }
         },
       ),
     );
@@ -32,9 +40,7 @@ class _MainPageState extends State<MainPage> {
   Widget _buildBody() {
     // return Container();
     List<Widget> _pages = BottomNavItemConfig.pages();
-    return PageView(
-      children: _pages
-    );
+    // return PageView(children: _pages);
     return Container(
       color: NftComponentColor.of(context).background,
       child: BlocBuilder<MainPageBloc, MainPageState>(
@@ -81,6 +87,10 @@ class _MainPageState extends State<MainPage> {
               ? const Text('No data')
               : Image.network(
                   _imgUrl,
+                  errorBuilder: (imgCxt, errorObj, trace) {
+                    Sentry.captureException(errorObj, stackTrace: trace, hint: 'nft image cover can not display');
+                    return Container(color: Colors.red,);
+                  },
                 ),
         ),
       ],

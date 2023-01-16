@@ -17,14 +17,19 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
 
   Future<void> _initialBloc(
       MainPageInitialEvent event, Emitter<MainPageState> emit) async {
-    // final _collectionsResult = await _collectionsUseCase.call(
-    //     params: const CollectionRequestParams(
-    //         chain: 'ethereum', pageSize: 10, include: 'all'));
-    // if (_collectionsResult.data != null &&
-    //     _collectionsResult.data!.isNotEmpty) {
-    //   _collections = _collectionsResult.data!;
-    //   emit(CollectionLoadedState(_collections));
-    // }
+    try{
+      final _collectionsResult = await _collectionsUseCase.call(
+          params: const CollectionRequestParams(
+              chain: 'ethereum', pageSize: 10, include: 'all'));
+      if (_collectionsResult.data != null &&
+          _collectionsResult.data!.isNotEmpty) {
+        _collections = _collectionsResult.data!;
+        emit(CollectionLoadedState(_collections));
+      }
+    }  catch (error, stack) {
+      print('error');
+    }
+
   }
 
   late final GetCollectionsUseCase _collectionsUseCase;
